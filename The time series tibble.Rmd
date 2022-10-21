@@ -90,5 +90,41 @@ weather_tsbl <-                             # Using `time_hour` as index
 weather_tsbl                             # Verify tsibble.                     
 ```
 
+An interval is automatically obtained based on the corresponding time representation:
 
+* integer/numeric/ordered: either “unit” or “year” (Y)
+* yearquarter/yearqtr: “quarter” (Q)
+* yearmonth/yearmon: “month” (M)
+* yearweek: “week” (W)
+* Date: “day” (D)
+* difftime: “week” (W), “day” (D), “hour” (h), “minute” (m), “second” (s)
+* POSIXct/hms: “hour” (h), “minute” (m), “second” (s), “millisecond” (us), “microsecond” (ms)
+* nanotime: “nanosecond” (ns)
+
+That is, a **tsibble** of monthly intervals expects the yearmonth/yearmon class i
+n the index column. Neither Date nor POSIXct gives a monthly tsibble.
+
+The print display is data-centric and contextually informative, such as data 
+dimension, time interval, and the number of time-based units. Above displays 
+the **weather_tsbl** its one-hour interval ([1h]) and the origin [3] as the key 
+along with three time series in the table.  
+
+
+### Data pipeline  
+
+This tidy data representation most naturally supports thinking of operations on 
+the data as building blocks, forming part of a “data pipeline” in time-based 
+context. Users who are familiar with tidyverse would find it easier to perform 
+common temporal analysis tasks. For example, **index_by()** is the counterpart 
+of **group_by()** in temporal context, but it only groups the time index. 
+**index_by() + summarise(*)** is used to summarise daily highs and lows at each
+station. As a result, the index is updated to the date with one-day interval 
+from the index time_hour; two new variables are created and computed for 
+daily maximum and minimum temperatures.  
+
+```{r the_data_pipeline}
+weather_tsbl 
+  
+    
+```
 
