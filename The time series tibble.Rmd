@@ -1,0 +1,23 @@
+---
+title: "Tme Series Analysis with R"
+author: "Craig W. Slinkman"
+date: "`r Sys.Date()`"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## Intordiction
+
+Hello.  My name is Craig Slinkman and I am a retired professor of business 
+statistics.  I spentdo most of my work in the ridy verse `r 2017 - 1979 +1` 
+teaching business statistics in the College of Business Statistics at the
+University of Texas at Arlington.
+
+I am an avid R user.   I live the  tidyverse. 
+This document was produced in RStudio. 
+
+This is an introduction of how to use the tidy verse to produce forecasting models.
+It is made from a number of tutorials that can be found on the Internet.
