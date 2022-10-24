@@ -123,8 +123,46 @@ from the index time_hour; two new variables are created and computed for
 daily maximum and minimum temperatures.  
 
 ```{r the_data_pipeline}
-weather_tsbl 
-  
-    
+weather_tsbl %>% 
+  group_by_key() %>% 
+  index_by(date = ~ as_date(.)) %>% 
+  summarise(
+    temp_high = max(temp, na.rm = TRUE),
+    temp_low = min(temp, na.rm = TRUE) )
 ```
+  
+  
+### Irregular time interval  
+
+Note that the tsibble handles regularly-spaced temporal data well, from seconds 
+to years based on its time representation (see ?tsibble). The option regular, 
+by default, is set to TRUE in as_tsibble(). Specify regular to FALSE to create
+a tsibble for the data collected at irregular time interval. Below shows the 
+scheduled date time of the flights in New York:
+
+```{r Irregular time interval}
+require( nycflights13 )                     # Contains flights data.
+
+flights_tsbl <-                             # Declare flights_tabl an an
+  flights %>%                               # irregular time series.
+    as_tsibble(
+      key = c( carrier, flight ), 
+      index = sched_dep_datetime, 
+      regular = FALSE )
+
+flights_tsbl                                # Verify tsibble.
+
+```
+
+I could not find this file so I am going to use one of my own.  You can find on GitHub.
+We will read directory form GitHub with the following two statement:
+
+```{r}
+
+Readings <-
+  read_csv( "https://raw.githubusercontent.com/gitHubSlinkman/diabetes/data/diabetes.csv" )
+
+)
+```
+
 
